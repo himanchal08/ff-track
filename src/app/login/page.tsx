@@ -36,82 +36,81 @@ export default function LoginPage() {
   return (
     <div style={{
       minHeight: '100dvh',
-      background: 'var(--bg-base)',
+      background: '#000000',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '24px 20px',
-      /* Ambient glow from the top */
-      backgroundImage: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(129,140,248,0.1) 0%, transparent 60%)',
     }}>
-
-      {/* Decorative blurred orbs */}
-      <div style={{
-        position: 'fixed', top: '10%', left: '5%',
-        width: '280px', height: '280px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'fixed', bottom: '15%', right: '5%',
-        width: '220px', height: '220px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-
-      <div style={{ width: '100%', maxWidth: '360px', position: 'relative' }}>
+      <div style={{ width: '100%', maxWidth: '340px' }}>
 
         {/* ── Brand ── */}
-        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-          {/* Icon row */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
-            {[
-              { Icon: Scale,    color: 'var(--accent-primary)', bg: 'var(--accent-primary-dim)',  border: 'var(--accent-primary-border)' },
-              { Icon: Dumbbell, color: 'var(--accent-violet)',  bg: 'var(--accent-violet-dim)',   border: 'rgba(167,139,250,0.25)' },
-              { Icon: Wind,     color: 'var(--accent-sky)',     bg: 'var(--accent-sky-dim)',      border: 'rgba(56,189,248,0.25)' },
-            ].map(({ Icon, color, bg, border }, i) => (
-              <div key={i} style={{
-                width: 48, height: 48, borderRadius: '13px',
-                background: bg, border: `1px solid ${border}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: `0 4px 16px ${bg}`,
-              }}>
-                <Icon size={22} color={color} strokeWidth={1.5} />
-              </div>
-            ))}
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          {/* Logo icon */}
+          <div style={{
+            width: 44, height: 44,
+            borderRadius: '12px',
+            background: '#111111',
+            border: '1px solid #262626',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 16px',
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ededed" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
           </div>
 
           <h1 style={{
-            fontSize: '26px', fontWeight: 800, margin: '0 0 6px',
-            background: 'var(--gradient-brand)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            letterSpacing: '-0.02em',
+            fontSize: '20px', fontWeight: 700, margin: '0 0 5px',
+            color: '#ededed', letterSpacing: '-0.01em',
           }}>
             FitTrack
           </h1>
-          <p style={{ fontSize: '14px', color: 'var(--fg-muted)', margin: 0 }}>
-            Your personal fitness dashboard
+          <p style={{ fontSize: '13px', color: '#52525b', margin: 0 }}>
+            Personal fitness dashboard
           </p>
         </div>
 
+        {/* ── Features row ── */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '28px' }}>
+          {[
+            { Icon: Scale,    label: 'Weight',  color: '#818cf8', bg: 'rgba(99,102,241,0.12)',   border: 'rgba(99,102,241,0.2)' },
+            { Icon: Dumbbell, label: 'Workout', color: '#a78bfa', bg: 'rgba(139,92,246,0.12)',   border: 'rgba(139,92,246,0.2)' },
+            { Icon: Wind,     label: 'Run',     color: '#38bdf8', bg: 'rgba(14,165,233,0.12)',   border: 'rgba(14,165,233,0.2)' },
+          ].map(({ Icon, label, color, bg, border }) => (
+            <div key={label} style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px',
+              padding: '10px 14px',
+              background: bg, border: `1px solid ${border}`,
+              borderRadius: '10px', minWidth: '72px',
+            }}>
+              <Icon size={16} color={color} strokeWidth={1.5} />
+              <span style={{ fontSize: '10px', color: '#71717a', fontWeight: 500 }}>{label}</span>
+            </div>
+          ))}
+        </div>
+
         {/* ── Card ── */}
-        <div className="glass-card-elevated" style={{ padding: '28px 22px' }}>
-          <h2 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--fg-primary)', margin: '0 0 22px' }}>
+        <div style={{
+          background: '#0a0a0a',
+          border: '1px solid #262626',
+          borderRadius: '12px',
+          padding: '24px 20px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+        }}>
+          <h2 style={{ fontSize: '15px', fontWeight: 600, color: '#ededed', margin: '0 0 20px' }}>
             Sign in
           </h2>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {/* Email */}
             <div>
               <label htmlFor="login-email" style={{
-                display: 'block', fontSize: '12px', fontWeight: 600,
-                color: 'var(--fg-secondary)', marginBottom: '7px',
-                textTransform: 'uppercase', letterSpacing: '0.06em',
-              }}>
-                Email
-              </label>
+                display: 'block', fontSize: '10px', fontWeight: 600,
+                color: '#71717a', marginBottom: '6px',
+                textTransform: 'uppercase', letterSpacing: '0.08em',
+              }}>Email</label>
               <input
                 id="login-email" type="email" autoComplete="email" required
                 className="input-field"
@@ -123,12 +122,10 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <label htmlFor="login-password" style={{
-                display: 'block', fontSize: '12px', fontWeight: 600,
-                color: 'var(--fg-secondary)', marginBottom: '7px',
-                textTransform: 'uppercase', letterSpacing: '0.06em',
-              }}>
-                Password
-              </label>
+                display: 'block', fontSize: '10px', fontWeight: 600,
+                color: '#71717a', marginBottom: '6px',
+                textTransform: 'uppercase', letterSpacing: '0.08em',
+              }}>Password</label>
               <input
                 id="login-password" type="password" autoComplete="current-password" required
                 className="input-field"
@@ -140,9 +137,9 @@ export default function LoginPage() {
             {/* Error */}
             {error && (
               <div role="alert" style={{
-                padding: '10px 13px', borderRadius: '8px',
-                background: 'var(--accent-rose-dim)', border: '1px solid rgba(251,113,133,0.25)',
-                fontSize: '13px', color: 'var(--accent-rose)',
+                padding: '9px 12px', borderRadius: '8px',
+                background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
+                fontSize: '13px', color: '#f87171',
               }}>
                 {error}
               </div>
@@ -151,12 +148,11 @@ export default function LoginPage() {
             {/* Submit */}
             <button
               id="login-submit-btn" type="submit" disabled={loading}
-              className="btn-primary"
+              className="btn-premium"
               style={{
-                width: '100%', padding: '0 20px',
-                background: loading ? 'var(--bg-elevated)' : undefined,
-                color: loading ? 'var(--fg-muted)' : 'white',
-                marginTop: '6px',
+                width: '100%', marginTop: '4px',
+                background: loading ? '#1a1a1a' : '#ededed',
+                color: loading ? '#52525b' : '#0a0a0a',
               }}
             >
               {loading ? 'Signing in…' : 'Sign in'}
@@ -164,11 +160,8 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p style={{
-          textAlign: 'center', fontSize: '11px', color: 'var(--fg-muted)',
-          marginTop: '20px',
-        }}>
-          Personal fitness tracker — private by design
+        <p style={{ textAlign: 'center', fontSize: '11px', color: '#3f3f46', marginTop: '20px' }}>
+          Private by design · Single account
         </p>
       </div>
     </div>
