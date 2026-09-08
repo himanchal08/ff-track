@@ -18,7 +18,8 @@ export default async function HomePage() {
   
   const todayLunch = await getTodayLunch();
   const tomorrowLunch = await getTomorrowLunch();
-  const soakCount = tomorrowLunch?.requires_overnight_soak ? 1 : 0;
+  // 1 is for the constant 70g dry chana, +1 if tomorrow's lunch requires soaking
+  const soakCount = 1 + (tomorrowLunch?.requires_overnight_soak ? 1 : 0);
 
   async function handleLogWeight(formData: FormData) {
     'use server';
