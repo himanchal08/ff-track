@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Utensils } from 'lucide-react';
-import { EmptyRow } from './WeightCard';
 
 interface MealsPreviewProps {
   breakfastOption?: string | null;
@@ -45,6 +44,20 @@ function MealRow({ label, value }: { label: string; value: string }) {
     <div style={{ display: 'flex', gap: '10px', alignItems: 'baseline' }}>
       <span style={{ fontSize: '10px', color: '#52525b', minWidth: '56px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</span>
       <span style={{ fontSize: '13px', color: '#a1a1aa' }}>{value}</span>
+    </div>
+  );
+}
+
+function EmptyRow({ label, action, href, id, color, bg, border }: { label: string, action: string, href: string, id: string, color: string, bg: string, border: string }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <span style={{ fontSize: '12px', color: '#71717a' }}>{label}</span>
+      <Link id={id} href={href} style={{ 
+        fontSize: '11px', fontWeight: 600, color, background: bg, border: `1px solid ${border}`,
+        padding: '4px 10px', borderRadius: '6px', textDecoration: 'none'
+      }}>
+        {action}
+      </Link>
     </div>
   );
 }
