@@ -20,18 +20,14 @@ export function MobileNav() {
       aria-label="Main navigation"
       style={{
         position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: 0, left: 0, right: 0,
         zIndex: 50,
-        background: 'rgba(11, 15, 26, 0.92)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid rgba(148,163,184,0.07)',
+        height: 'var(--nav-height)',
+        background: '#000000',
+        borderTop: '1px solid #1a1a1a',
         display: 'flex',
         alignItems: 'stretch',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        height: 'var(--nav-height)',
       }}
     >
       {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
@@ -54,38 +50,32 @@ export function MobileNav() {
               textDecoration: 'none',
               minHeight: '48px',
               position: 'relative',
-              transition: 'opacity 0.15s ease',
+              transition: 'opacity 0.15s',
             }}
           >
-            {/* Active pill indicator */}
+            {/* Active top line — Study OS style */}
             {isActive && (
               <span style={{
                 position: 'absolute',
-                top: 8,
-                width: 20,
-                height: 3,
-                borderRadius: '2px',
-                background: 'var(--gradient-brand)',
-                boxShadow: '0 0 8px rgba(129,140,248,0.6)',
+                top: 0,
+                width: 24,
+                height: 1,
+                background: '#ededed',
+                borderRadius: '0 0 2px 2px',
               }} />
             )}
 
             <Icon
-              size={20}
+              size={19}
               strokeWidth={isActive ? 2 : 1.5}
-              style={{
-                color: isActive ? 'var(--accent-primary)' : 'var(--fg-muted)',
-                transition: 'color 0.2s ease',
-                marginTop: isActive ? '4px' : '0',
-                filter: isActive ? 'drop-shadow(0 0 5px rgba(129,140,248,0.5))' : 'none',
-              }}
+              style={{ color: isActive ? '#ededed' : '#52525b', transition: 'color 0.15s' }}
             />
             <span style={{
               fontSize: '10px',
               fontWeight: isActive ? 600 : 400,
-              color: isActive ? 'var(--accent-primary)' : 'var(--fg-muted)',
-              letterSpacing: '0.03em',
-              transition: 'color 0.2s ease',
+              color: isActive ? '#ededed' : '#52525b',
+              letterSpacing: '0.02em',
+              transition: 'color 0.15s',
             }}>
               {label}
             </span>
