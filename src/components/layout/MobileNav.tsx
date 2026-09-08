@@ -5,11 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Home, Scale, Dumbbell, Wind, MoreHorizontal } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { href: '/',        label: 'Home',    icon: Home },
-  { href: '/weight',  label: 'Weight',  icon: Scale },
-  { href: '/workout', label: 'Workout', icon: Dumbbell },
-  { href: '/run',     label: 'Run',     icon: Wind },
-  { href: '/more',    label: 'More',    icon: MoreHorizontal },
+  { href: '/',      label: 'Home',  icon: Home },
+  { href: '/meals', label: 'Meals', icon: MoreHorizontal },
 ] as const;
 
 export function MobileNav() {
