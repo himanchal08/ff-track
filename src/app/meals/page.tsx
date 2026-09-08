@@ -15,25 +15,26 @@ export default async function MealsPage() {
       <div style={{ paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         
         {/* Soak Reminder Banner */}
-        {needsSoak && (
-          <div style={{ 
-            background: 'rgba(56,189,248,0.1)', 
-            border: '1px solid rgba(56,189,248,0.3)', 
-            padding: '16px', 
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '12px'
-          }}>
-            <Droplets size={20} color="#38bdf8" style={{ marginTop: '2px', flexShrink: 0 }} />
-            <div>
-              <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#38bdf8', margin: '0 0 4px' }}>Overnight Soak Required</h3>
-              <p style={{ fontSize: '13px', color: '#a1a1aa', margin: 0, lineHeight: 1.5 }}>
-                Tomorrow&apos;s lunch is <strong>{tomorrowLunch?.ingredient}</strong>. Don&apos;t forget to soak it tonight!
-              </p>
-            </div>
+        <div style={{ 
+          background: 'rgba(56,189,248,0.1)', 
+          border: '1px solid rgba(56,189,248,0.3)', 
+          padding: '16px', 
+          borderRadius: '12px',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '12px'
+        }}>
+          <Droplets size={20} color="#38bdf8" style={{ marginTop: '2px', flexShrink: 0 }} />
+          <div>
+            <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#38bdf8', margin: '0 0 4px' }}>Overnight Soak Required</h3>
+            <ul style={{ fontSize: '13px', color: '#a1a1aa', margin: 0, paddingLeft: '16px', lineHeight: 1.5 }}>
+              <li><strong>70 g dry chana</strong> (Every day for breakfast)</li>
+              {needsSoak && (
+                <li><strong>{tomorrowLunch?.ingredient}</strong> (Tomorrow's lunch)</li>
+              )}
+            </ul>
           </div>
-        )}
+        </div>
 
         {/* Lunch Rotation */}
         <div className="glass-card" style={{ padding: '20px' }}>
