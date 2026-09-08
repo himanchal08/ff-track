@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Dumbbell } from 'lucide-react';
+import { EmptyRow } from './WeightCard';
 
 interface WorkoutCardProps {
   todayPlan?: string | null;
@@ -11,74 +11,36 @@ export function WorkoutCard({ todayPlan, exerciseCount, completed }: WorkoutCard
   const isEmpty = !todayPlan;
 
   return (
-    <div
-      className="glass-card animate-fade-slide-up animate-stagger-2"
-      style={{ padding: '20px', marginBottom: '12px' }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-        <div
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: '10px',
-            background: 'rgba(0, 217, 245, 0.12)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Dumbbell size={18} color="var(--accent-secondary)" strokeWidth={1.5} />
+    <div className="glass-card animate-fade-slide-up animate-stagger-2" style={{ padding: '18px', marginBottom: '10px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+        <div className="icon-pill" style={{ width: 34, height: 34, background: 'var(--accent-violet-dim)', border: '1px solid rgba(167,139,250,0.2)' }}>
+          <Dumbbell size={16} color="var(--accent-violet)" strokeWidth={1.5} />
         </div>
-        <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--fg-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--fg-secondary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
           Workout
         </span>
         {completed && (
-          <span
-            style={{
-              marginLeft: 'auto',
-              fontSize: '11px',
-              fontWeight: 600,
-              color: 'var(--accent-primary)',
-              background: 'var(--accent-primary-dim)',
-              padding: '2px 8px',
-              borderRadius: '4px',
-            }}
-          >
+          <span style={{
+            marginLeft: 'auto', fontSize: '11px', fontWeight: 600,
+            color: 'var(--accent-emerald)', background: 'var(--accent-emerald-dim)',
+            padding: '2px 8px', borderRadius: '6px', border: '1px solid rgba(52,211,153,0.2)',
+          }}>
             Done ✓
           </span>
         )}
       </div>
 
       {isEmpty ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '14px', color: 'var(--fg-muted)' }}>No workout logged today</span>
-          <Link
-            id="workout-card-start-btn"
-            href="/workout"
-            style={{
-              fontSize: '13px',
-              fontWeight: 600,
-              color: 'var(--accent-secondary)',
-              textDecoration: 'none',
-              padding: '8px 14px',
-              borderRadius: '8px',
-              background: 'rgba(0, 217, 245, 0.12)',
-              border: '1px solid rgba(0, 217, 245, 0.3)',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Start workout
-          </Link>
-        </div>
+        <EmptyRow
+          label="No workout logged today" action="Start workout" href="/workout"
+          id="workout-card-start-btn"
+          color="var(--accent-violet)" dimColor="var(--accent-violet-dim)" borderColor="rgba(167,139,250,0.2)"
+        />
       ) : (
         <div>
-          <p style={{ fontSize: '20px', fontWeight: 700, color: 'var(--fg-primary)', margin: 0 }}>
-            {todayPlan}
-          </p>
+          <p style={{ fontSize: '20px', fontWeight: 700, color: 'var(--fg-primary)', margin: 0, letterSpacing: '-0.01em' }}>{todayPlan}</p>
           {exerciseCount && (
-            <p style={{ fontSize: '13px', color: 'var(--fg-muted)', marginTop: '4px' }}>
-              {exerciseCount} exercises planned
-            </p>
+            <p style={{ fontSize: '12px', color: 'var(--fg-muted)', marginTop: '4px', margin: '4px 0 0' }}>{exerciseCount} exercises planned</p>
           )}
         </div>
       )}

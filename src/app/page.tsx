@@ -6,38 +6,25 @@ import { ProgressCard } from '@/components/home/ProgressCard';
 import { MealsPreview } from '@/components/home/MealsPreview';
 import { today } from '@/lib/utils/dates';
 
-/**
- * Home page — Phase 0 shell with placeholder cards.
- * In future phases, cards will fetch real data from Supabase.
- */
 export default function HomePage() {
-  const dateStr = today();
-  const dayName = new Date().toLocaleDateString('en-IN', { weekday: 'long' });
-  const dateLabel = new Date().toLocaleDateString('en-IN', {
-    day: 'numeric',
-    month: 'short',
-  });
+  const dayName  = new Date().toLocaleDateString('en-IN', { weekday: 'long' });
+  const dateLabel = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
 
   return (
     <Shell subtitle={`${dayName}, ${dateLabel}`}>
       {/* Greeting */}
-      <div style={{ paddingTop: '20px', paddingBottom: '16px' }}>
-        <h2
-          style={{
-            fontSize: '22px',
-            fontWeight: 700,
-            color: 'var(--fg-primary)',
-            margin: 0,
-          }}
-        >
+      <div style={{ padding: '20px 0 14px' }}>
+        <h2 style={{
+          fontSize: '20px', fontWeight: 800, margin: '0 0 3px',
+          color: 'var(--fg-primary)', letterSpacing: '-0.02em',
+        }}>
           Good {getTimeOfDay()} 👋
         </h2>
-        <p style={{ fontSize: '14px', color: 'var(--fg-muted)', marginTop: '4px' }}>
+        <p style={{ fontSize: '13px', color: 'var(--fg-muted)', margin: 0 }}>
           Here&apos;s your overview for today
         </p>
       </div>
 
-      {/* Cards */}
       <WeightCard />
       <WorkoutCard />
       <RunCard />
@@ -48,8 +35,8 @@ export default function HomePage() {
 }
 
 function getTimeOfDay(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return 'morning';
-  if (hour < 17) return 'afternoon';
+  const h = new Date().getHours();
+  if (h < 12) return 'morning';
+  if (h < 17) return 'afternoon';
   return 'evening';
 }

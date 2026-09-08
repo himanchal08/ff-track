@@ -7,10 +7,10 @@ import { Scale, Dumbbell, Wind } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,236 +34,129 @@ export default function LoginPage() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100dvh',
-        background: 'var(--bg-base)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '24px 20px',
-      }}
-    >
-      {/* Background gradient orbs */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '-20%',
-          left: '-20%',
-          width: '60%',
-          height: '60%',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0,245,160,0.06) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'fixed',
-          bottom: '-20%',
-          right: '-20%',
-          width: '60%',
-          height: '60%',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0,217,245,0.05) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }}
-      />
+    <div style={{
+      minHeight: '100dvh',
+      background: 'var(--bg-base)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '24px 20px',
+      /* Ambient glow from the top */
+      backgroundImage: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(129,140,248,0.1) 0%, transparent 60%)',
+    }}>
 
-      <div style={{ width: '100%', maxWidth: '380px', position: 'relative' }}>
-        {/* Logo / Brand */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          {/* Icon trio */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '12px',
-              marginBottom: '20px',
-            }}
-          >
+      {/* Decorative blurred orbs */}
+      <div style={{
+        position: 'fixed', top: '10%', left: '5%',
+        width: '280px', height: '280px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'fixed', bottom: '15%', right: '5%',
+        width: '220px', height: '220px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ width: '100%', maxWidth: '360px', position: 'relative' }}>
+
+        {/* ── Brand ── */}
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+          {/* Icon row */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
             {[
-              { Icon: Scale, color: 'var(--accent-primary)', bg: 'var(--accent-primary-dim)' },
-              { Icon: Dumbbell, color: 'var(--accent-secondary)', bg: 'var(--accent-secondary-dim)' },
-              { Icon: Wind, color: 'var(--accent-warning)', bg: 'rgba(245,166,35,0.12)' },
-            ].map(({ Icon, color, bg }, i) => (
-              <div
-                key={i}
-                style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: '14px',
-                  background: bg,
-                  border: `1px solid ${color}33`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Icon size={24} color={color} strokeWidth={1.5} />
+              { Icon: Scale,    color: 'var(--accent-primary)', bg: 'var(--accent-primary-dim)',  border: 'var(--accent-primary-border)' },
+              { Icon: Dumbbell, color: 'var(--accent-violet)',  bg: 'var(--accent-violet-dim)',   border: 'rgba(167,139,250,0.25)' },
+              { Icon: Wind,     color: 'var(--accent-sky)',     bg: 'var(--accent-sky-dim)',      border: 'rgba(56,189,248,0.25)' },
+            ].map(({ Icon, color, bg, border }, i) => (
+              <div key={i} style={{
+                width: 48, height: 48, borderRadius: '13px',
+                background: bg, border: `1px solid ${border}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: `0 4px 16px ${bg}`,
+              }}>
+                <Icon size={22} color={color} strokeWidth={1.5} />
               </div>
             ))}
           </div>
 
-          <h1
-            style={{
-              fontSize: '28px',
-              fontWeight: 800,
-              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              margin: '0 0 8px',
-            }}
-          >
+          <h1 style={{
+            fontSize: '26px', fontWeight: 800, margin: '0 0 6px',
+            background: 'var(--gradient-brand)',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            letterSpacing: '-0.02em',
+          }}>
             FitTrack
           </h1>
-          <p style={{ fontSize: '15px', color: 'var(--fg-muted)', margin: 0 }}>
+          <p style={{ fontSize: '14px', color: 'var(--fg-muted)', margin: 0 }}>
             Your personal fitness dashboard
           </p>
         </div>
 
-        {/* Login card */}
-        <div
-          className="glass-card-elevated"
-          style={{ padding: '28px 24px' }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              fontWeight: 700,
-              color: 'var(--fg-primary)',
-              margin: '0 0 24px',
-            }}
-          >
+        {/* ── Card ── */}
+        <div className="glass-card-elevated" style={{ padding: '28px 22px' }}>
+          <h2 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--fg-primary)', margin: '0 0 22px' }}>
             Sign in
           </h2>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+
             {/* Email */}
             <div>
-              <label
-                htmlFor="login-email"
-                style={{
-                  display: 'block',
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  color: 'var(--fg-secondary)',
-                  marginBottom: '6px',
-                }}
-              >
+              <label htmlFor="login-email" style={{
+                display: 'block', fontSize: '12px', fontWeight: 600,
+                color: 'var(--fg-secondary)', marginBottom: '7px',
+                textTransform: 'uppercase', letterSpacing: '0.06em',
+              }}>
                 Email
               </label>
               <input
-                id="login-email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="login-email" type="email" autoComplete="email" required
+                className="input-field"
+                value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                style={{
-                  width: '100%',
-                  padding: '14px 16px',
-                  borderRadius: '10px',
-                  background: 'var(--bg-base)',
-                  border: '1px solid var(--border-default)',
-                  color: 'var(--fg-primary)',
-                  fontSize: '16px',
-                  outline: 'none',
-                  transition: 'border-color 0.2s ease',
-                  boxSizing: 'border-box',
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = 'var(--accent-primary)';
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'var(--border-default)';
-                }}
               />
             </div>
 
             {/* Password */}
             <div>
-              <label
-                htmlFor="login-password"
-                style={{
-                  display: 'block',
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  color: 'var(--fg-secondary)',
-                  marginBottom: '6px',
-                }}
-              >
+              <label htmlFor="login-password" style={{
+                display: 'block', fontSize: '12px', fontWeight: 600,
+                color: 'var(--fg-secondary)', marginBottom: '7px',
+                textTransform: 'uppercase', letterSpacing: '0.06em',
+              }}>
                 Password
               </label>
               <input
-                id="login-password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                id="login-password" type="password" autoComplete="current-password" required
+                className="input-field"
+                value={password} onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
-                style={{
-                  width: '100%',
-                  padding: '14px 16px',
-                  borderRadius: '10px',
-                  background: 'var(--bg-base)',
-                  border: '1px solid var(--border-default)',
-                  color: 'var(--fg-primary)',
-                  fontSize: '16px',
-                  outline: 'none',
-                  transition: 'border-color 0.2s ease',
-                  boxSizing: 'border-box',
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = 'var(--accent-primary)';
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'var(--border-default)';
-                }}
               />
             </div>
 
-            {/* Error message */}
+            {/* Error */}
             {error && (
-              <div
-                role="alert"
-                style={{
-                  padding: '10px 14px',
-                  borderRadius: '8px',
-                  background: 'rgba(245, 66, 66, 0.1)',
-                  border: '1px solid rgba(245, 66, 66, 0.3)',
-                  fontSize: '13px',
-                  color: 'var(--accent-danger)',
-                }}
-              >
+              <div role="alert" style={{
+                padding: '10px 13px', borderRadius: '8px',
+                background: 'var(--accent-rose-dim)', border: '1px solid rgba(251,113,133,0.25)',
+                fontSize: '13px', color: 'var(--accent-rose)',
+              }}>
                 {error}
               </div>
             )}
 
             {/* Submit */}
             <button
-              id="login-submit-btn"
-              type="submit"
-              disabled={loading}
+              id="login-submit-btn" type="submit" disabled={loading}
+              className="btn-primary"
               style={{
-                width: '100%',
-                padding: '16px',
-                borderRadius: '12px',
-                background: loading
-                  ? 'var(--fg-muted)'
-                  : 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                border: 'none',
-                color: 'var(--fg-inverse)',
-                fontSize: '16px',
-                fontWeight: 700,
-                cursor: loading ? 'not-allowed' : 'pointer',
-                transition: 'all 0.2s ease',
-                marginTop: '4px',
-                minHeight: '52px',
+                width: '100%', padding: '0 20px',
+                background: loading ? 'var(--bg-elevated)' : undefined,
+                color: loading ? 'var(--fg-muted)' : 'white',
+                marginTop: '6px',
               }}
             >
               {loading ? 'Signing in…' : 'Sign in'}
@@ -271,14 +164,10 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p
-          style={{
-            textAlign: 'center',
-            fontSize: '12px',
-            color: 'var(--fg-muted)',
-            marginTop: '24px',
-          }}
-        >
+        <p style={{
+          textAlign: 'center', fontSize: '11px', color: 'var(--fg-muted)',
+          marginTop: '20px',
+        }}>
           Personal fitness tracker — private by design
         </p>
       </div>
