@@ -8,6 +8,7 @@ import { today } from '@/lib/utils/dates';
 import { getWeightTrend } from '@/lib/actions/weight';
 import { getTodayWorkoutSummary } from '@/lib/actions/workout';
 import { getTodayRunSummary } from '@/lib/actions/run';
+import { getTodayLunch, getTomorrowLunch } from '@/lib/actions/meals';
 
 export default async function HomePage() {
   const dayName  = new Date().toLocaleDateString('en-IN', { weekday: 'long' });
@@ -31,6 +32,10 @@ export default async function HomePage() {
 
   const workoutSummary = await getTodayWorkoutSummary();
   const runSummary = await getTodayRunSummary();
+  
+  const todayLunch = await getTodayLunch();
+  const tomorrowLunch = await getTomorrowLunch();
+  const soakCount = tomorrowLunch?.requires_overnight_soak ? 1 : 0;
 
   return (
     <Shell subtitle={`${dayName}, ${dateLabel}`}>
@@ -58,7 +63,10 @@ export default async function HomePage() {
         paceMinPerKm={runSummary?.pace}
       />
       <ProgressCard />
-      <MealsPreview />
+      <MealsPreview 
+        lunchRotation={todayLunch?.ingredient}
+        soakCount={soakCount}
+      />
     </Shell>
   );
 }

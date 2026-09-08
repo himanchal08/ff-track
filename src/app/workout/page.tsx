@@ -21,7 +21,7 @@ export default async function WorkoutPage() {
   const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   
-  let todayLogs: { id: string, exercise: string, sets: number, weight_used_kg: number, workout_plan_id: string }[] = [];
+  let todayLogs: { id: string, exercise: string, sets: number[], weight_used_kg: number, workout_plan_id: string }[] = [];
   if (userData.user) {
     const { data } = await (supabase as any)
       .from('workout_logs')
