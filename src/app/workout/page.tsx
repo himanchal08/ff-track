@@ -1,12 +1,41 @@
 import { Shell } from '@/components/layout/Shell';
+import { getWorkoutPlans, getWorkoutLogs } from '@/lib/actions/workout';
+import { WorkoutLogger } from '@/components/workout/WorkoutLogger';
+import { today } from '@/lib/utils/dates';
 
-export default function WorkoutPage() {
+export default async function WorkoutPage() {
+  const dateStr = today();
+  
+  // Need to fetch plans and today's logs for any plan
+  const plans = await getWorkoutPlans();
+  
+  // Note: For simplicity, we'll fetch logs across all plans for today, 
+  // or just fetch logs for the currently selected plan inside the client. 
+  // Wait, `getWorkoutLogs` requires a `planId`. Let's fetch all logs for today instead of by planId.
+  // I will adjust the server action logic or fetch directly here.
+  // Actually, let's just fetch all workout_logs for today directly here, 
+  // because the PRD says "see the planned exercise list" and log them.
+  
+  // We'll import `createClient` and do it here since it's a Server Component
+  const { createClient } = await import('@/lib/supabase/server');
+  const supabase = await createClient();
+  const { data: userData } = await supabase.auth.getUser();
+  
+  let todayLogs = [];
+  if (userData.user) {
+    const { data } = await supabase
+      .from('workout_logs')
+      .select('id, exercise, sets, weight_used_kg, workout_plan_id')
+      .eq('user_id', userData.user.id)
+      .eq('date', dateStr)
+      .order('created_at');
+    todayLogs = data || [];
+  }
+
   return (
     <Shell title="Workout">
       <div style={{ paddingTop: '20px' }}>
-        <p style={{ color: 'var(--fg-muted)', fontSize: '15px' }}>
-          Workout tracking — coming in Phase 2
-        </p>
+        <WorkoutLogger plans={plans} todayLogs={todayLogs} dateStr={dateStr} />
       </div>
     </Shell>
   );
