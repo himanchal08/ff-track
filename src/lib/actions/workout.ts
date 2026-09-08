@@ -21,7 +21,7 @@ export type WorkoutLog = {
 
 // 1. Fetch predefined plans (create defaults if none exist)
 export async function getWorkoutPlans(): Promise<WorkoutPlan[]> {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return [];
 
@@ -56,7 +56,7 @@ export async function getWorkoutPlans(): Promise<WorkoutPlan[]> {
 
 // 2. Fetch logs for a specific day and plan
 export async function getWorkoutLogs(dateStr: string, planId: string): Promise<WorkoutLog[]> {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return [];
 
@@ -80,7 +80,7 @@ export async function logExercise(
   sets: number[], // array of reps
   weightKg: number | null
 ) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) throw new Error('Not authenticated');
 
@@ -143,7 +143,7 @@ export async function logExercise(
 
 // 4. Delete an exercise log
 export async function deleteExerciseLog(logId: string) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return;
 
@@ -158,7 +158,7 @@ export async function deleteExerciseLog(logId: string) {
 
 // 5. Get today's plan name for home page
 export async function getTodayWorkoutSummary() {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return null;
 

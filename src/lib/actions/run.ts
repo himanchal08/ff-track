@@ -20,7 +20,7 @@ export async function logRun(
   timeSeconds: number,
   continuousSeconds: number | null
 ) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) throw new Error('Not authenticated');
 
@@ -42,7 +42,7 @@ export async function logRun(
 
 // Fetch logs for the current week to show weekly progression
 export async function getWeeklyRunLogs(currentDateStr: string = today()) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return [];
 
@@ -60,7 +60,7 @@ export async function getWeeklyRunLogs(currentDateStr: string = today()) {
 }
 
 export async function getTodayRunSummary() {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return null;
 

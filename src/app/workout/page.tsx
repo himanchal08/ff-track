@@ -18,12 +18,12 @@ export default async function WorkoutPage() {
   
   // We'll import `createClient` and do it here since it's a Server Component
   const { createClient } = await import('@/lib/supabase/server');
-  const supabase = await createClient();
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   
-  let todayLogs = [];
+  let todayLogs: { id: string, exercise: string, sets: number, weight_used_kg: number, workout_plan_id: string }[] = [];
   if (userData.user) {
-    const { data } = await supabase
+    const { data } = await (supabase as any)
       .from('workout_logs')
       .select('id, exercise, sets, weight_used_kg, workout_plan_id')
       .eq('user_id', userData.user.id)

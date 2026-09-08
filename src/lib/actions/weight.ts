@@ -7,7 +7,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/lib/supabase/types';
 
 export async function logWeight(weightKg: number, dateStr: string = today()) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData, error: userError } = await supabase.auth.getUser();
   if (userError || !userData.user) throw new Error('Not authenticated');
 
@@ -26,7 +26,7 @@ export async function logWeight(weightKg: number, dateStr: string = today()) {
 }
 
 export async function getWeightTrend(days: number = 30) {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return [];
 
@@ -66,7 +66,7 @@ export async function getWeightTrend(days: number = 30) {
 }
 
 export async function getTodayWeight() {
-  const supabase = await createClient() as SupabaseClient<Database>;
+  const supabase = await createClient() as any;
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return null;
 
